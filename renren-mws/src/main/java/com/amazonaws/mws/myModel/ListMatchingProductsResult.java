@@ -1,5 +1,5 @@
 
-package com.amazonaws.mws.model;
+package com.amazonaws.mws.myModel;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="RequestId" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="Count" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,19 +31,23 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "requestId"
+    "product",
+    "identifiers",
+    "attributeSets",
+    "relationships",
+    "salesRankings"
 })
-@XmlRootElement(name = "ResponseMetadata")
-public class ResponseMetadata {
+@XmlRootElement(name = "ListMatchingProductsResult")
+public class ListMatchingProductsResult {
 
-    @XmlElement(name = "RequestId", required = true)
-    protected String requestId;
+    @XmlElement(name = "Count")
+    protected int count;
 
     /**
      * Default constructor
      * 
      */
-    public ResponseMetadata() {
+    public ListMatchingProductsResult() {
         super();
     }
 
@@ -51,47 +55,39 @@ public class ResponseMetadata {
      * Value constructor
      * 
      */
-    public ResponseMetadata(final String requestId) {
-        this.requestId = requestId;
+    public ListMatchingProductsResult(final int count) {
+        this.count = count;
     }
 
     /**
-     * Gets the value of the requestId property.
+     * Gets the value of the count property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getRequestId() {
-        return requestId;
+    public int getCount() {
+        return count;
     }
 
     /**
-     * Sets the value of the requestId property.
+     * Sets the value of the count property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setRequestId(String value) {
-        this.requestId = value;
+    public void setCount(int value) {
+        this.count = value;
     }
 
-    public boolean isSetRequestId() {
-        return (this.requestId!= null);
+    public boolean isSetCount() {
+        return true;
     }
 
     /**
-     * Sets the value of the RequestId property.
+     * Sets the value of the Count property.
      * 
      * @param value
      * @return
      *     this instance
      */
-    public ResponseMetadata withRequestId(String value) {
-        setRequestId(value);
+    public ListMatchingProductsResult withCount(int value) {
+        setCount(value);
         return this;
     }
     
@@ -104,12 +100,12 @@ public class ResponseMetadata {
      * tag expected to be set by calling method. This fragment
      * returns inner properties representation only
      */
-    public String toXMLFragment() {
+    protected String toXMLFragment() {
         StringBuffer xml = new StringBuffer();
-        if (isSetRequestId()) {
-            xml.append("<RequestId>");
-            xml.append(escapeXML(getRequestId()));
-            xml.append("</RequestId>");
+        if (isSetCount()) {
+            xml.append("<Count>");
+            xml.append(getCount() + "");
+            xml.append("</Count>");
         }
         return xml.toString();
     }
@@ -157,14 +153,14 @@ public class ResponseMetadata {
      * returns inner properties representation only
      *
      */
-    public String toJSONFragment() {
+    protected String toJSONFragment() {
         StringBuffer json = new StringBuffer();
         boolean first = true;
-        if (isSetRequestId()) {
+        if (isSetCount()) {
             if (!first) json.append(", ");
-            json.append(quoteJSON("RequestId"));
+            json.append(quoteJSON("Count"));
             json.append(" : ");
-            json.append(quoteJSON(getRequestId()));
+            json.append(quoteJSON(getCount() + ""));
             first = false;
         }
         return json.toString();

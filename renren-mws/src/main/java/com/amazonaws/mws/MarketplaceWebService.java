@@ -20,6 +20,8 @@
 package com.amazonaws.mws;
 
 import com.amazonaws.mws.model.*;
+import com.amazonaws.mws.myModel.ListMatchingProductsRequest;
+import com.amazonaws.mws.myModel.ListMatchingProductsResponse;
 
 import java.util.concurrent.Future;
 
@@ -1396,5 +1398,7 @@ public interface  MarketplaceWebService {
      * 
      */
     public Future<SubmitFeedResponse> submitFeedFromFileAsync(final SubmitFeedRequest request);
-
+    
+    
+    public ListMatchingProductsResponse ListMatchingProducts(ListMatchingProductsRequest request) throws MarketplaceWebServiceException ;
 }
