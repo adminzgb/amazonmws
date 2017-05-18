@@ -3322,7 +3322,7 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 	private Map<String, String> convertListMatchingProducts(ListMatchingProductsRequest request) {
 
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("Action", "GetFeedSubmissionCount");
+		params.put("Action", "ListMatchingProducts");
 		if (request.isSetMarketplace()) {
 			params.put("Marketplace", request.getMarketplace());
 		}
@@ -3333,8 +3333,7 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 			params.put("MWSAuthToken", request.getMWSAuthToken());
 		}
 		if (request.isSetQuery()) {
-			String query = request.getQuery();
-			params.put("Query", query);
+			params.put("Query", request.getQuery());
 		}
 		if (request.isSetQueryContextId()) {
 			params.put("Query", request.getQueryContextId());

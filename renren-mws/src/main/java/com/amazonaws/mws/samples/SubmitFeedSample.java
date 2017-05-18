@@ -57,7 +57,7 @@ public class SubmitFeedSample {
 	 */
 	public static void main(String... args) {
 
-		/************************************************************************
+		/************************************************* ***********************
 		 * Access Key ID and Secret Access Key ID, obtained from:
 		 * http://aws.amazon.com
 		 ***********************************************************************/

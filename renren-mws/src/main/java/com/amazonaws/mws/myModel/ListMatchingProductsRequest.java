@@ -333,26 +333,22 @@ public class ListMatchingProductsRequest {
         }
         if (isSetMarketplaceId()) {
             if (!first) json.append(", ");
-            json.append("\"MarketplaceId\" : {");
-            String marketplaceId= getMarketplaceId();
-            json.append(quoteJSON(marketplaceId));
-            json.append("}");
+            json.append(quoteJSON("MarketplaceId"));
+            json.append(" : ");
+            json.append(quoteJSON(getMarketplaceId()));
             first = false;
         }
         if (isSetQuery()) {
             if (!first) json.append(", ");
-            json.append("\"Query\" : {");
-            String query= getQuery();
-            json.append(quoteJSON(query));
-            json.append("}");
+            json.append(quoteJSON("Query"));
+            json.append(" : ");
+            json.append(getQuery());
             first = false;
         }
         if (isSetQueryContextId()) {
             if (!first) json.append(", ");
-            json.append("\"QueryContextId\" : {");
-            String  queryContextId = getQueryContextId();
-            json.append(quoteJSON(queryContextId));
-            json.append("}");
+            json.append(quoteJSON("QueryContextId"));
+            json.append(getQueryContextId());
             first = false;
         }
         if (isSetMWSAuthToken()) {

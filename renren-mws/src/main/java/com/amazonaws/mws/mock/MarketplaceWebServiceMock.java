@@ -20,6 +20,8 @@
 package com.amazonaws.mws.mock;
 
 import com.amazonaws.mws.model.*;
+import com.amazonaws.mws.myModel.ListMatchingProductsRequest;
+import com.amazonaws.mws.myModel.ListMatchingProductsResponse;
 import com.amazonaws.mws.*;
 
 import java.util.concurrent.Callable;
@@ -912,4 +914,11 @@ GetReportScheduleListRequest request) {
     private Unmarshaller getUnmarshaller() {
         return unmarshaller.get();
     }
+
+	@Override
+	public ListMatchingProductsResponse ListMatchingProducts(ListMatchingProductsRequest request)
+			throws MarketplaceWebServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

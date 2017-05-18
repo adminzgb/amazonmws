@@ -124,14 +124,20 @@ public class ListMatchingProductsSample {
         final String sellerDevAuthToken = Contants.MWS_Auth_Token;
     	final IdList marketplaces = new IdList(Arrays.asList(Contants.MARKETPLACE_ID_US));
 
-        GetFeedSubmissionCountRequest request = new GetFeedSubmissionCountRequest();
+        ListMatchingProductsRequest request = new ListMatchingProductsRequest();
         request.setMerchant( merchantId );
         request.setMWSAuthToken(sellerDevAuthToken);
+        request.setMarketplace(Contants.MARKETPLACE_ID_US);
+        request.setQuery("bell");
+        request.setMarketplaceId(Contants.MARKETPLACE_ID_US);
+        request.setQueryContextId("tools");
+        
+        
         //request.setMWSAuthToken(sellerDevAuthToken);
 
         // @TODO: set request parameters here
 
-        // invokeGetFeedSubmissionCount(service, request);
+        invokeGetFeedSubmissionCount(service, request);
 
     }
 
