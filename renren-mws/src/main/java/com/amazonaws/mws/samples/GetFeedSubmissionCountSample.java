@@ -123,7 +123,7 @@ public class GetFeedSubmissionCountSample {
 
         // @TODO: set request parameters here
 
-        // invokeGetFeedSubmissionCount(service, request);
+//         invokeGetFeedSubmissionCount(service, request);
 
     }
 

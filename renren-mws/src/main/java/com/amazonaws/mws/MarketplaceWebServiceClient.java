@@ -2096,9 +2096,10 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 				method.addHeader(new BasicHeader("Content-Type", sfr.getContentType().toString()));
 
 			} else {
-				method = new HttpPost(config.getServiceURL());
+				//method = new HttpPost(config.getServiceURL());
+				method = new HttpPost(config.getServiceURL() + "?" + getSubmitFeedUrlParameters(parameters));
 				log.debug("Adding required parameters...");
-				addRequiredParametersToRequest(method, parameters);
+//				addRequiredParametersToRequest(method, parameters);
 
 				/* Set content type and encoding */
 				log.debug("Setting content-type to application/x-www-form-urlencoded; charset="

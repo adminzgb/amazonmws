@@ -65,7 +65,7 @@ public class ListMatchingProductsSample {
          * Uncomment to set the correct MWS endpoint.
          ************************************************************************/
         // US
-        config.setServiceURL("https://mws.amazonservices.com/");
+        config.setServiceURL("https://mws.amazonservices.com/Products/2009-01-01");
         // UK
         // config.setServiceURL("https://mws.amazonservices.co.uk/");
         // Germany
@@ -127,7 +127,7 @@ public class ListMatchingProductsSample {
         ListMatchingProductsRequest request = new ListMatchingProductsRequest();
         request.setMerchant( merchantId );
         request.setMWSAuthToken(sellerDevAuthToken);
-        request.setMarketplace(Contants.MARKETPLACE_ID_US);
+//        request.setMarketplace(Contants.MARKETPLACE_ID_US);
         request.setQuery("bell");
         request.setMarketplaceId(Contants.MARKETPLACE_ID_US);
         request.setQueryContextId("tools");
