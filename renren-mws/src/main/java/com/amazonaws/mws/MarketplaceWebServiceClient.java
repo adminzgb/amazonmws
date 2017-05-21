@@ -2096,7 +2096,7 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 				method.addHeader(new BasicHeader("Content-Type", sfr.getContentType().toString()));
 
 			} else {
-				//method = new HttpPost(config.getServiceURL());
+//				method = new HttpPost(config.getServiceURL());
 				method = new HttpPost(config.getServiceURL() + "?" + getSubmitFeedUrlParameters(parameters));
 				log.debug("Adding required parameters...");
 //				addRequiredParametersToRequest(method, parameters);
@@ -3324,9 +3324,6 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("Action", "ListMatchingProducts");
-		if (request.isSetMarketplace()) {
-			params.put("Marketplace", request.getMarketplace());
-		}
 		if (request.isSetMerchant()) {
 			params.put("Merchant", request.getMerchant());
 		}

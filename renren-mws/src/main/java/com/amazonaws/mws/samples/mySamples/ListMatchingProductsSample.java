@@ -65,7 +65,7 @@ public class ListMatchingProductsSample {
          * Uncomment to set the correct MWS endpoint.
          ************************************************************************/
         // US
-        config.setServiceURL("https://mws.amazonservices.com/Products/2009-01-01");
+        config.setServiceURL("https://mws.amazonservices.com/Products/2011-10-01");
         // UK
         // config.setServiceURL("https://mws.amazonservices.co.uk/");
         // Germany
