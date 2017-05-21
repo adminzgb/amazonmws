@@ -19,18 +19,14 @@
 
 package com.amazonaws.mws.samples.mySamples;
 
-import java.util.Arrays;
-
 import com.amazonaws.common.Contants;
 import com.amazonaws.mws.MarketplaceWebService;
 import com.amazonaws.mws.MarketplaceWebServiceClient;
 import com.amazonaws.mws.MarketplaceWebServiceConfig;
 import com.amazonaws.mws.MarketplaceWebServiceException;
-import com.amazonaws.mws.model.GetFeedSubmissionCountRequest;
-import com.amazonaws.mws.model.GetFeedSubmissionCountResponse;
-import com.amazonaws.mws.model.GetFeedSubmissionCountResult;
-import com.amazonaws.mws.model.IdList;
+import com.amazonaws.mws.model.ASINList;
 import com.amazonaws.mws.model.ResponseMetadata;
+import com.amazonaws.mws.myModel.GetMatchingProductRequest;
 import com.amazonaws.mws.myModel.ListMatchingProductsRequest;
 import com.amazonaws.mws.myModel.ListMatchingProductsResponse;
 
@@ -40,7 +36,7 @@ import com.amazonaws.mws.myModel.ListMatchingProductsResponse;
  *
  *
  */
-public class ListMatchingProductsSample {
+public class GetMatchingProductSample {
 
     /**
      * Just add a few required parameters, and try the service
@@ -124,13 +120,9 @@ public class ListMatchingProductsSample {
         final String sellerId = Contants.SELLER_ID;
         final String sellerDevAuthToken = Contants.MWS_Auth_Token;
 
-        ListMatchingProductsRequest request = new ListMatchingProductsRequest();
+        GetMatchingProductRequest request = new GetMatchingProductRequest();
         request.setSellerId(sellerId);
-        request.setMWSAuthToken(sellerDevAuthToken);
-//        request.setMarketplace(Contants.MARKETPLACE_ID_US);
-        request.setQuery("bell");
-        request.setMarketplaceId(Contants.MARKETPLACE_ID_US);
-        request.setQueryContextId("tools");
+        request.setMwsAuthToken(sellerDevAuthToken);
         
         
         //request.setMWSAuthToken(sellerDevAuthToken);

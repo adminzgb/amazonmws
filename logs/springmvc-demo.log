@@ -1,0 +1,18 @@
+2017-05-21 10:39:31 [ERROR]-[com.amazonaws.mws.MarketplaceWebServiceClient] Service Error. Response Status: 403. Received message: <?xml version="1.0"?>
+<ErrorResponse xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+  <Error>
+    <Type>Sender</Type>
+    <Code>SignatureDoesNotMatch</Code>
+    <Message>The request signature we calculated does not match the signature you provided. Check your AWS Secret Access Key and signing method. Consult the service documentation for details.</Message>
+  </Error>
+  <RequestID>e1a90892-2e86-4b53-a252-bb75be5f7c6c</RequestID>
+</ErrorResponse>
+
+  2017-05-21 10:39:31 [ERROR]-[com.amazonaws.mws.MarketplaceWebServiceClient] Caught MarketplaceWebServiceException
+  com.amazonaws.mws.MarketplaceWebServiceException: Internal Error
+	at com.amazonaws.mws.MarketplaceWebServiceClient.processErrors(MarketplaceWebServiceClient.java:2435)
+	at com.amazonaws.mws.MarketplaceWebServiceClient.invoke(MarketplaceWebServiceClient.java:2284)
+	at com.amazonaws.mws.MarketplaceWebServiceClient.invoke(MarketplaceWebServiceClient.java:2053)
+	at com.amazonaws.mws.MarketplaceWebServiceClient.ListMatchingProducts(MarketplaceWebServiceClient.java:3317)
+	at com.amazonaws.mws.samples.mySamples.ListMatchingProductsSample.invokeGetFeedSubmissionCount(ListMatchingProductsSample.java:156)
+	at com.amazonaws.mws.samples.mySamples.ListMatchingProductsSample.main(ListMatchingProductsSample.java:140)

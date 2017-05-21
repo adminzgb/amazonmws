@@ -2106,7 +2106,7 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 						+ DEFAULT_ENCODING.toLowerCase());
 				method.addHeader(new BasicHeader("Content-Type",
 						"application/x-www-form-urlencoded; charset=" + DEFAULT_ENCODING.toLowerCase()));
-
+				
 				log.debug("Done adding additional required parameters. Parameters now: " + parameters);
 			}
 
@@ -2447,7 +2447,7 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 	 * Formats date as ISO 8601 timestamp
 	 */
 	private String getFormattedTimestamp() {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 		df.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return df.format(new Date());
 	}
@@ -2510,7 +2510,7 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 		data.append("\n");
 		URI endpoint = null;
 		try {
-			endpoint = new URI(config.getServiceURL().toLowerCase());
+			endpoint = new URI(config.getServiceURL());
 		} catch (URISyntaxException ex) {
 			log.error("URI Syntax Exception", ex);
 			throw new SignatureException("URI Syntax Exception thrown " + "while constructing string to sign", ex);
@@ -3324,8 +3324,8 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("Action", "ListMatchingProducts");
-		if (request.isSetMerchant()) {
-			params.put("Merchant", request.getMerchant());
+		if (request.isSetSellerId()) {
+			params.put("SellerId", request.getSellerId());
 		}
 		if (request.isSetMWSAuthToken()) {
 			params.put("MWSAuthToken", request.getMWSAuthToken());

@@ -51,6 +51,10 @@ public class MarketplaceWebServiceConfig {
     public String getServiceVersion() {
         return serviceVersion;
     }
+    
+    public void setServiceVersion(String serviceVersion){
+    	this.serviceVersion = serviceVersion;
+    }
 
     /**
      * Gets ConnectionTimeout property

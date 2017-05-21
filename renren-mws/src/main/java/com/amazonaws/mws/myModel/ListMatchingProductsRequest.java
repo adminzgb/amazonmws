@@ -47,12 +47,12 @@ import com.amazonaws.mws.model.TypeList;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "marketplaceId", "merchant", "mwsAuthToken", "query", "queryContextId" })
+@XmlType(name = "", propOrder = { "marketplaceId",  "mwsAuthToken", "query", "queryContextId","SellerId" })
 @XmlRootElement(name = "ListMatchingProductsRequest")
 public class ListMatchingProductsRequest {
 
-	@XmlElement(name = "Merchant", required = true)
-	protected String merchant;
+	@XmlElement(name = "SellerId", required = true)
+	protected String sellerId;
 	@XmlElement(name = "MarketplaceId", required = true)
 	protected String marketplaceId;
 	@XmlElement(name = "Query", required = true)
@@ -74,14 +74,14 @@ public class ListMatchingProductsRequest {
 	 * Value constructor
 	 * 
 	 */
-	public ListMatchingProductsRequest(final String merchant, final String marketplaceId, final String query,
+	public ListMatchingProductsRequest(final String sellerId, final String marketplaceId, final String query,
 			final String queryContextId) {
-		this(merchant, marketplaceId, query, queryContextId, null);
+		this(sellerId, marketplaceId, query, queryContextId, null);
 	}
 
-	public ListMatchingProductsRequest(final String merchant, final String marketplaceId, final String query,
+	public ListMatchingProductsRequest(final String sellerId, final String marketplaceId, final String query,
 			final String queryContextId, final String mwsAuthToken) {
-		this.merchant = merchant;
+		this.sellerId = sellerId;
 		this.marketplaceId = marketplaceId;
 		this.query = query;
 		this.queryContextId = queryContextId;
@@ -94,8 +94,8 @@ public class ListMatchingProductsRequest {
 	 * @return possible object is {@link String }
 	 * 
 	 */
-	public String getMerchant() {
-		return merchant;
+	public String getSellerId() {
+		return sellerId;
 	}
 
 	/**
@@ -105,12 +105,12 @@ public class ListMatchingProductsRequest {
 	 *            allowed object is {@link String }
 	 * 
 	 */
-	public void setMerchant(String value) {
-		this.merchant = value;
+	public void setSellerId(String value) {
+		this.sellerId = value;
 	}
 
-	public boolean isSetMerchant() {
-		return (this.merchant != null);
+	public boolean isSetSellerId() {
+		return (this.sellerId != null);
 	}
 
 	public boolean isSetMarketplaceId() {
@@ -187,8 +187,8 @@ public class ListMatchingProductsRequest {
 	 * @param value
 	 * @return this instance
 	 */
-	public ListMatchingProductsRequest withMerchant(String value) {
-		setMerchant(value);
+	public ListMatchingProductsRequest withSellerId(String value) {
+		setSellerId(value);
 		return this;
 	}
 
@@ -248,12 +248,12 @@ public class ListMatchingProductsRequest {
 	protected String toJSONFragment() {
 		StringBuffer json = new StringBuffer();
 		boolean first = true;
-		if (isSetMerchant()) {
+		if (isSetSellerId()) {
 			if (!first)
 				json.append(", ");
-			json.append(quoteJSON("Merchant"));
+			json.append(quoteJSON("SellerId"));
 			json.append(" : ");
-			json.append(quoteJSON(getMerchant()));
+			json.append(quoteJSON(getSellerId()));
 			first = false;
 		}
 		if (isSetMarketplaceId()) {
