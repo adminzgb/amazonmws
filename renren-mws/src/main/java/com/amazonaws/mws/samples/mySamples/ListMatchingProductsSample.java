@@ -66,7 +66,6 @@ public class ListMatchingProductsSample {
          ************************************************************************/
         // US
         config.setServiceURL("https://mws.amazonservices.com/Products/2011-10-01");
-//        config.se
         // UK
         // config.setServiceURL("https://mws.amazonservices.co.uk/");
         // Germany
@@ -121,12 +120,11 @@ public class ListMatchingProductsSample {
          * Marketplace and Merchant IDs are required parameters for all 
          * Marketplace Web Service calls.
          ***********************************************************************/
-        final String merchantId = Contants.SELLER_ID;
+        final String sellerId = Contants.SELLER_ID;
         final String sellerDevAuthToken = Contants.MWS_Auth_Token;
-    	final IdList marketplaces = new IdList(Arrays.asList(Contants.MARKETPLACE_ID_US));
 
         ListMatchingProductsRequest request = new ListMatchingProductsRequest();
-        request.setMerchant( merchantId );
+        request.setSellerId(sellerId);
         request.setMWSAuthToken(sellerDevAuthToken);
 //        request.setMarketplace(Contants.MARKETPLACE_ID_US);
         request.setQuery("bell");
