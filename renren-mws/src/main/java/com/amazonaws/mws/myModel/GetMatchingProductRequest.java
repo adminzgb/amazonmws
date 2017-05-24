@@ -513,7 +513,7 @@ public class GetMatchingProductRequest {
             IdList  feedSubmissionIdList = getFeedSubmissionIdList();
 
 
-            json.append(feedSubmissionIdList.toJSONFragment());
+//            json.append(feedSubmissionIdList.toJSONFragment());
             json.append("}");
             first = false;
         }
@@ -530,7 +530,7 @@ public class GetMatchingProductRequest {
             TypeList  feedTypeList = getFeedTypeList();
 
 
-            json.append(feedTypeList.toJSONFragment());
+//            json.append(feedTypeList.toJSONFragment());
             json.append("}");
             first = false;
         }
@@ -540,7 +540,7 @@ public class GetMatchingProductRequest {
             StatusList  feedProcessingStatusList = getFeedProcessingStatusList();
 
 
-            json.append(feedProcessingStatusList.toJSONFragment());
+//            json.append(feedProcessingStatusList.toJSONFragment());
             json.append("}");
             first = false;
         }

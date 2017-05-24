@@ -17,7 +17,7 @@ public class SysPageController {
 	@RequestMapping("sys/{url}.html")
 	public String page(@PathVariable("url") String url){
 		return "sys/" + url + ".html";
-	}
+	}	
 
 	@RequestMapping("generator/{url}.html")
 	public String generator(@PathVariable("url") String url){

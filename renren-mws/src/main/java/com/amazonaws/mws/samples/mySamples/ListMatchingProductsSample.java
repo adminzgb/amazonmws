@@ -66,6 +66,7 @@ public class ListMatchingProductsSample {
          ************************************************************************/
         // US
         config.setServiceURL("https://mws.amazonservices.com/Products/2011-10-01");
+//        config.se
         // UK
         // config.setServiceURL("https://mws.amazonservices.co.uk/");
         // Germany

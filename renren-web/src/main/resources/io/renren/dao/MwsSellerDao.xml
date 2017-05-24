@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.dao.MwsSellerDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.entity.MwsSellerEntity" id="mwsSellerMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="accessKeyId" column="access_key_id"/>
+        <result property="sellerId" column="seller_id"/>
+        <result property="secretAccessKey" column="secret_access_key"/>
+        <result property="appName" column="app_name"/>
+        <result property="appVersion" column="app_version"/>
+        <result property="mwsAuthToken" column="MWS_AUTH_TOKEN"/>
+        <result property="marketplaceIdCa" column="marketplace_id_ca"/>
+        <result property="marketplaceIdUs" column="marketplace_id_us"/>
+        <result property="merchantIdCa" column="merchant_id_ca"/>
+        <result property="maerchantIdCom" column="maerchant_id_com"/>
+        <result property="maerchantIdComMx" column="maerchant_id_com_mx"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+	<select id="queryObject" resultType="io.renren.entity.MwsSellerEntity">
+		select * from mws_seller where id = #{value}
+	</select>
+
+	<select id="queryList" resultType="io.renren.entity.MwsSellerEntity">
+		select * from mws_seller
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="queryTotal" resultType="int">
+		select count(*) from mws_seller 
+	</select>
+	 
+	<insert id="save" parameterType="io.renren.entity.MwsSellerEntity">
+		insert into mws_seller
+		(
+			`id`, 
+			`user_id`, 
+			`access_key_id`, 
+			`seller_id`, 
+			`secret_access_key`, 
+			`app_name`, 
+			`app_version`, 
+			`MWS_AUTH_TOKEN`, 
+			`marketplace_id_ca`, 
+			`marketplace_id_us`, 
+			`merchant_id_ca`, 
+			`maerchant_id_com`, 
+			`maerchant_id_com_mx`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{userId}, 
+			#{accessKeyId}, 
+			#{sellerId}, 
+			#{secretAccessKey}, 
+			#{appName}, 
+			#{appVersion}, 
+			#{mwsAuthToken}, 
+			#{marketplaceIdCa}, 
+			#{marketplaceIdUs}, 
+			#{merchantIdCa}, 
+			#{maerchantIdCom}, 
+			#{maerchantIdComMx}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="io.renren.entity.MwsSellerEntity">
+		update mws_seller 
+		<set>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="accessKeyId != null">`access_key_id` = #{accessKeyId}, </if>
+			<if test="sellerId != null">`seller_id` = #{sellerId}, </if>
+			<if test="secretAccessKey != null">`secret_access_key` = #{secretAccessKey}, </if>
+			<if test="appName != null">`app_name` = #{appName}, </if>
+			<if test="appVersion != null">`app_version` = #{appVersion}, </if>
+			<if test="mwsAuthToken != null">`MWS_AUTH_TOKEN` = #{mwsAuthToken}, </if>
+			<if test="marketplaceIdCa != null">`marketplace_id_ca` = #{marketplaceIdCa}, </if>
+			<if test="marketplaceIdUs != null">`marketplace_id_us` = #{marketplaceIdUs}, </if>
+			<if test="merchantIdCa != null">`merchant_id_ca` = #{merchantIdCa}, </if>
+			<if test="maerchantIdCom != null">`maerchant_id_com` = #{maerchantIdCom}, </if>
+			<if test="maerchantIdComMx != null">`maerchant_id_com_mx` = #{maerchantIdComMx}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from mws_seller where id = #{value}
+	</delete>
+	
+	<delete id="deleteBatch">
+		delete from mws_seller where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

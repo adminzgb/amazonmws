@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+											
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">accessKeyId</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.accessKeyId" placeholder="accessKeyId"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">sellerId</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.sellerId" placeholder="sellerId"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">secret_access_key</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.secretAccessKey" placeholder="secret_access_key"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">APP_NAME</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.appName" placeholder="APP_NAME"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">APP_VERSION</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.appVersion" placeholder="APP_VERSION"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">MWS_AUTH_TOKEN</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.mwsAuthToken" placeholder="MWS_AUTH_TOKEN"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">MARKETPLACE_ID_CA</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.marketplaceIdCa" placeholder="MARKETPLACE_ID_CA"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">MARKETPLACE_ID_US</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.marketplaceIdUs" placeholder="MARKETPLACE_ID_US"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">MERCHANT_ID_CA</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.merchantIdCa" placeholder="MERCHANT_ID_CA"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">MERCHANT_ID_COM</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.maerchantIdCom" placeholder="MERCHANT_ID_COM"/>
+			    </div>
+			</div>
+									<div class="form-group">
+			   	<div class="col-sm-2 control-label">MERCHANT_ID_COM_MX</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="mwsSeller.maerchantIdComMx" placeholder="MERCHANT_ID_COM_MX"/>
+			    </div>
+			</div>
+									
+							<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="${rc.contextPath}/js/generator/mwsseller.js?_${date.systemTime}"></script>
+</body>
+</html>
