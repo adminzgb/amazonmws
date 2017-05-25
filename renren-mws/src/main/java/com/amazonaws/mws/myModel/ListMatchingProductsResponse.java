@@ -42,7 +42,7 @@ import com.amazonaws.mws.model.ResponseMetadata;
 public class ListMatchingProductsResponse {
 
     @XmlElement(name = "GetFeedSubmissionCountResult", required = true)
-    protected ListMatchingProductsResult getFeedSubmissionCountResult;
+    protected ListMatchingProductsResult listMatchingProductsResult;
     @XmlElement(name = "ResponseMetadata", required = true)
     protected ResponseMetadata responseMetadata;
 
@@ -58,8 +58,8 @@ public class ListMatchingProductsResponse {
      * Value constructor
      * 
      */
-    public ListMatchingProductsResponse(final ListMatchingProductsResult getFeedSubmissionCountResult, final ResponseMetadata responseMetadata) {
-        this.getFeedSubmissionCountResult = getFeedSubmissionCountResult;
+    public ListMatchingProductsResponse(final ListMatchingProductsResult listMatchingProductsResult, final ResponseMetadata responseMetadata) {
+        this.listMatchingProductsResult = listMatchingProductsResult;
         this.responseMetadata = responseMetadata;
     }
 
@@ -71,8 +71,8 @@ public class ListMatchingProductsResponse {
      *     {@link ListMatchingProductsResult }
      *     
      */
-    public ListMatchingProductsResult getGetFeedSubmissionCountResult() {
-        return getFeedSubmissionCountResult;
+    public ListMatchingProductsResult getListMatchingProductsResult() {
+        return listMatchingProductsResult;
     }
 
     /**
@@ -83,12 +83,12 @@ public class ListMatchingProductsResponse {
      *     {@link ListMatchingProductsResult }
      *     
      */
-    public void setGetFeedSubmissionCountResult(ListMatchingProductsResult value) {
-        this.getFeedSubmissionCountResult = value;
+    public void setListMatchingProductsResult(ListMatchingProductsResult value) {
+        this.listMatchingProductsResult = value;
     }
 
-    public boolean isSetGetFeedSubmissionCountResult() {
-        return (this.getFeedSubmissionCountResult!= null);
+    public boolean isSetListMatchingProductsResult() {
+        return (this.listMatchingProductsResult!= null);
     }
 
     /**
@@ -126,8 +126,8 @@ public class ListMatchingProductsResponse {
      * @return
      *     this instance
      */
-    public ListMatchingProductsResponse withGetFeedSubmissionCountResult(ListMatchingProductsResult value) {
-        setGetFeedSubmissionCountResult(value);
+    public ListMatchingProductsResponse withListMatchingProductsResult(ListMatchingProductsResult value) {
+        setListMatchingProductsResult(value);
         return this;
     }
 
@@ -170,8 +170,8 @@ public class ListMatchingProductsResponse {
     public String toXML() {
         StringBuffer xml = new StringBuffer();
         xml.append("<GetFeedSubmissionCountResponse xmlns=\"http://mws.amazonaws.com/doc/2009-01-01/\">");
-        if (isSetGetFeedSubmissionCountResult()) {
-            ListMatchingProductsResult  getFeedSubmissionCountResult = getGetFeedSubmissionCountResult();
+        if (isSetListMatchingProductsResult()) {
+            ListMatchingProductsResult  getFeedSubmissionCountResult = getListMatchingProductsResult();
             xml.append("<GetFeedSubmissionCountResult>");
             xml.append(getFeedSubmissionCountResult.toXMLFragment());
             xml.append("</GetFeedSubmissionCountResult>");
@@ -234,10 +234,10 @@ public class ListMatchingProductsResponse {
         json.append(quoteJSON("http://mws.amazonaws.com/doc/2009-01-01/"));
         boolean first = true;
         json.append(", ");
-        if (isSetGetFeedSubmissionCountResult()) {
+        if (isSetListMatchingProductsResult()) {
             if (!first) json.append(", ");
             json.append("\"GetFeedSubmissionCountResult\" : {");
-            ListMatchingProductsResult  getFeedSubmissionCountResult = getGetFeedSubmissionCountResult();
+            ListMatchingProductsResult  getFeedSubmissionCountResult = getListMatchingProductsResult();
 
             json.append(getFeedSubmissionCountResult.toJSONFragment());
             json.append("}");

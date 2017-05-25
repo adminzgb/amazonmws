@@ -19,17 +19,11 @@
 
 package com.amazonaws.mws.samples.mySamples;
 
-import java.util.Arrays;
-
 import com.amazonaws.common.Contants;
 import com.amazonaws.mws.MarketplaceWebService;
 import com.amazonaws.mws.MarketplaceWebServiceClient;
 import com.amazonaws.mws.MarketplaceWebServiceConfig;
 import com.amazonaws.mws.MarketplaceWebServiceException;
-import com.amazonaws.mws.model.GetFeedSubmissionCountRequest;
-import com.amazonaws.mws.model.GetFeedSubmissionCountResponse;
-import com.amazonaws.mws.model.GetFeedSubmissionCountResult;
-import com.amazonaws.mws.model.IdList;
 import com.amazonaws.mws.model.ResponseMetadata;
 import com.amazonaws.mws.myModel.ListMatchingProductsRequest;
 import com.amazonaws.mws.myModel.ListMatchingProductsResponse;
@@ -136,7 +130,7 @@ public class ListMatchingProductsSample {
 
         // @TODO: set request parameters here
 
-        invokeGetFeedSubmissionCount(service, request);
+        invokeListMatchingProducts(service, request);
 
     }
 
@@ -149,7 +143,7 @@ public class ListMatchingProductsSample {
      * @param service instance of MarketplaceWebService service
      * @param request Action to invoke
      */
-    public static void invokeGetFeedSubmissionCount(MarketplaceWebService service, ListMatchingProductsRequest request) {
+    public static void invokeListMatchingProducts(MarketplaceWebService service, ListMatchingProductsRequest request) {
         try {
 
             ListMatchingProductsResponse response = service.ListMatchingProducts(request);
@@ -161,7 +155,7 @@ public class ListMatchingProductsSample {
 
             System.out.print("    ListMatchingProductsResponse");
             System.out.println();
-            if (response.isSetGetFeedSubmissionCountResult()) {
+            if (response.isSetListMatchingProductsResult()) {
                 System.out.print("        GetFeedSubmissionCountResult");
                 System.out.println();
 //                GetFeedSubmissionCountResult  getFeedSubmissionCountResult = response.getGetFeedSubmissionCountResult();

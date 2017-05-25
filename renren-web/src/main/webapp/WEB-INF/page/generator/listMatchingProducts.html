@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title> #parse("sys/header.html")
+</head>
+<body>
+	<div id="rrapp">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">根据搜索查询，返回商品列表</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">marketplaceId</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="marketplaceId"
+							placeholder="marketplaceId" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">关键词</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="query"
+							placeholder="关键词" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">搜索范围</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="queryContextId"
+							placeholder="Apparel（服饰），Appliances（家电）" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label"></div>
+					<input type="button" class="btn btn-primary" name="saveOrUpdate"
+						value="确定" /> &nbsp;&nbsp;<input type="button"
+						class="btn btn-warning" name="reload" value="返回" />
+				</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$("input[name='saveOrUpdate']").click(function() {
+			  //Ajax调用处理
+            $.ajax({
+               type: "POST",
+               url: "test.php",
+               data: "name=garfield&age=18",
+               success: function(data){
+                        $("#myDiv").html('<h2>'+data+'</h2>');
+                  }
+            });
+		});
+	</script>
+</body>
+</html>
