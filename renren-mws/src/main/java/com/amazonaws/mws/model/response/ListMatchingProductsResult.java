@@ -1,11 +1,13 @@
 
-package com.amazonaws.mws.myModel;
+package com.amazonaws.mws.model.response;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.amazonaws.mws.model.IdList;
 
 
 /**
@@ -31,17 +33,13 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "product",
-    "identifiers",
-    "attributeSets",
-    "relationships",
-    "salesRankings"
+    "products"
 })
 @XmlRootElement(name = "ListMatchingProductsResult")
 public class ListMatchingProductsResult {
 
-    @XmlElement(name = "Count")
-    protected int count;
+    @XmlElement(name = "Products")
+    protected ProductList products;
 
     /**
      * Default constructor
@@ -55,27 +53,27 @@ public class ListMatchingProductsResult {
      * Value constructor
      * 
      */
-    public ListMatchingProductsResult(final int count) {
-        this.count = count;
+    public ListMatchingProductsResult(final ProductList productList) {
+        this.products = productList;
     }
 
     /**
      * Gets the value of the count property.
      * 
      */
-    public int getCount() {
-        return count;
+    public ProductList getProducts() {
+        return products;
     }
 
     /**
      * Sets the value of the count property.
      * 
      */
-    public void setCount(int value) {
-        this.count = value;
+    public void setProducts(ProductList productList) {
+        this.products = productList;
     }
 
-    public boolean isSetCount() {
+    public boolean isSetProducts() {
         return true;
     }
 
@@ -86,8 +84,8 @@ public class ListMatchingProductsResult {
      * @return
      *     this instance
      */
-    public ListMatchingProductsResult withCount(int value) {
-        setCount(value);
+    public ListMatchingProductsResult withCount(ProductList productList) {
+        setProducts(productList);
         return this;
     }
     
@@ -102,10 +100,10 @@ public class ListMatchingProductsResult {
      */
     protected String toXMLFragment() {
         StringBuffer xml = new StringBuffer();
-        if (isSetCount()) {
-            xml.append("<Count>");
-            xml.append(getCount() + "");
-            xml.append("</Count>");
+        if (isSetProducts()) {
+            xml.append("<Products>");
+            xml.append(getProducts()+ "");
+            xml.append("</Products>");
         }
         return xml.toString();
     }
@@ -153,18 +151,20 @@ public class ListMatchingProductsResult {
      * returns inner properties representation only
      *
      */
-    protected String toJSONFragment() {
-        StringBuffer json = new StringBuffer();
-        boolean first = true;
-        if (isSetCount()) {
-            if (!first) json.append(", ");
-            json.append(quoteJSON("Count"));
-            json.append(" : ");
-            json.append(quoteJSON(getCount() + ""));
-            first = false;
-        }
-        return json.toString();
-    }
+//    protected String toJSONFragment() {
+//        StringBuffer json = new StringBuffer();
+//        boolean first = true;
+//        if (isSetProducts()) {
+//            if (!first) json.append(", ");
+//            json.append("\"Products\" : {");
+//            ProductList productList = getProducts();
+//
+//            json.append(productList.);
+//            json.append("}");
+//            first = false;
+//        }
+//        return json.toString();
+//    }
 
     /**
      *

@@ -25,8 +25,8 @@ import com.amazonaws.mws.MarketplaceWebServiceClient;
 import com.amazonaws.mws.MarketplaceWebServiceConfig;
 import com.amazonaws.mws.MarketplaceWebServiceException;
 import com.amazonaws.mws.model.ResponseMetadata;
-import com.amazonaws.mws.myModel.ListMatchingProductsRequest;
-import com.amazonaws.mws.myModel.ListMatchingProductsResponse;
+import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
+import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
 
 /**
  *
@@ -143,11 +143,11 @@ public class ListMatchingProductsSample {
      * @param service instance of MarketplaceWebService service
      * @param request Action to invoke
      */
-    public static void invokeListMatchingProducts(MarketplaceWebService service, ListMatchingProductsRequest request) {
+    public static ListMatchingProductsResponse invokeListMatchingProducts(MarketplaceWebService service, ListMatchingProductsRequest request) {
         try {
 
             ListMatchingProductsResponse response = service.ListMatchingProducts(request);
-
+            
 
             System.out.println ("ListMatchingProducts Action Response");
             System.out.println ("=============================================================================");
@@ -180,7 +180,7 @@ public class ListMatchingProductsSample {
             System.out.println();
             System.out.println(response.getResponseHeaderMetadata());
             System.out.println();
-
+            return response;
 
         } catch (MarketplaceWebServiceException ex) {
 
@@ -191,6 +191,7 @@ public class ListMatchingProductsSample {
             System.out.println("Request ID: " + ex.getRequestId());
             System.out.print("XML: " + ex.getXML());
             System.out.println("ResponseHeaderMetadata: " + ex.getResponseHeaderMetadata());
+            return null;
         }
     }
 

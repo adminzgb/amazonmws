@@ -20,8 +20,8 @@
 package com.amazonaws.mws;
 
 import com.amazonaws.mws.model.*;
-import com.amazonaws.mws.myModel.ListMatchingProductsRequest;
-import com.amazonaws.mws.myModel.ListMatchingProductsResponse;
+import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
+import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
 
 import java.util.concurrent.Future;
 

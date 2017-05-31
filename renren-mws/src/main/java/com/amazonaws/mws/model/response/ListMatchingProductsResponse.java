@@ -1,5 +1,5 @@
 
-package com.amazonaws.mws.myModel;
+package com.amazonaws.mws.model.response;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -38,10 +38,10 @@ import com.amazonaws.mws.model.ResponseMetadata;
     "listMatchingProductsResult",
     "responseMetadata"
 })
-@XmlRootElement(name = "GetFeedSubmissionCountResponse")
+@XmlRootElement(name = "ListMatchingProductsResponse")
 public class ListMatchingProductsResponse {
 
-    @XmlElement(name = "GetFeedSubmissionCountResult", required = true)
+    @XmlElement(name = "ListMatchingProductsResult", required = true)
     protected ListMatchingProductsResult listMatchingProductsResult;
     @XmlElement(name = "ResponseMetadata", required = true)
     protected ResponseMetadata responseMetadata;
@@ -169,12 +169,12 @@ public class ListMatchingProductsResponse {
      */
     public String toXML() {
         StringBuffer xml = new StringBuffer();
-        xml.append("<GetFeedSubmissionCountResponse xmlns=\"http://mws.amazonaws.com/doc/2009-01-01/\">");
+        xml.append("<ListMatchingProductsResponse xmlns=\"http://mws.amazonaws.com/doc/2009-01-01/\">");
         if (isSetListMatchingProductsResult()) {
             ListMatchingProductsResult  getFeedSubmissionCountResult = getListMatchingProductsResult();
-            xml.append("<GetFeedSubmissionCountResult>");
+            xml.append("<ListMatchingProductsResult>");
             xml.append(getFeedSubmissionCountResult.toXMLFragment());
-            xml.append("</GetFeedSubmissionCountResult>");
+            xml.append("</ListMatchingProductsResult>");
         } 
         if (isSetResponseMetadata()) {
             ResponseMetadata  responseMetadata = getResponseMetadata();
@@ -182,7 +182,7 @@ public class ListMatchingProductsResponse {
             xml.append(responseMetadata.toXMLFragment());
             xml.append("</ResponseMetadata>");
         } 
-        xml.append("</GetFeedSubmissionCountResponse>");
+        xml.append("</ListMatchingProductsResponse>");
         return xml.toString();
     }
 
@@ -228,7 +228,7 @@ public class ListMatchingProductsResponse {
      */
     public String toJSON() {
         StringBuffer json = new StringBuffer();
-        json.append("{\"GetFeedSubmissionCountResponse\" : {");
+        json.append("{\"ListMatchingProductsResponse\" : {");
         json.append(quoteJSON("@xmlns"));
         json.append(" : ");
         json.append(quoteJSON("http://mws.amazonaws.com/doc/2009-01-01/"));
@@ -239,7 +239,7 @@ public class ListMatchingProductsResponse {
             json.append("\"GetFeedSubmissionCountResult\" : {");
             ListMatchingProductsResult  getFeedSubmissionCountResult = getListMatchingProductsResult();
 
-            json.append(getFeedSubmissionCountResult.toJSONFragment());
+           //json.append(getFeedSubmissionCountResult.toJSONFragment());
             json.append("}");
             first = false;
         } 

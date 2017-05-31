@@ -38,6 +38,8 @@ public class Contants {
 	public static final String MARKETPLACE_ID_US = "ATVPDKIKX0DER";
 
 	public static final String FEED_TYPE = "ATVPDKIKX0DER";
+	
+	public static final String XMLNS_PATTERN = "xmlns([^ ]*)=([^ ]*)http([^>^\"]*)\"";
 
 	/**
 	 * Calculate content MD5 header values for feeds stored on disk.

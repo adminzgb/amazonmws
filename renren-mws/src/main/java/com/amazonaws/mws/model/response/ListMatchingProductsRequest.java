@@ -1,5 +1,5 @@
 
-package com.amazonaws.mws.myModel;
+package com.amazonaws.mws.model.response;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

@@ -11,28 +11,29 @@
 				<div class="form-group">
 					<div class="col-sm-2 control-label">marketplaceId</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="marketplaceId"
+						<input type="text" class="form-control" name="marketplaceId" id="marketplaceId" 
 							placeholder="marketplaceId" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label">关键词</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="query"
+						<input type="text" class="form-control" name="query" id="query"
 							placeholder="关键词" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label">搜索范围</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="queryContextId"
+					<div class="col-sm-10"> 
+						<input type="text" class="form-control" name="queryContextId" id="queryContextId"
 							placeholder="Apparel（服饰），Appliances（家电）" />
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-2 control-label"></div>
 					<input type="button" class="btn btn-primary" name="saveOrUpdate"
-						value="确定" /> &nbsp;&nbsp;<input type="button"
+						value="确定" />
+					<input type="button"
 						class="btn btn-warning" name="reload" value="返回" />
 				</div>
 		</div>
@@ -41,10 +42,20 @@
 	<script type="text/javascript">
 		$("input[name='saveOrUpdate']").click(function() {
 			  //Ajax调用处理
+			  var source={};
+			  source.marketplaceId = $("#marketplaceId").val();
+			  source.query = $("#query").val();
+			  source.queryContextId = $("#queryContextId").val();
             $.ajax({
                type: "POST",
-               url: "test.php",
-               data: "name=garfield&age=18",
+               contentType:"application/x-www-form-urlencoded",
+               dataType:"json",
+               url: "../mwsseller/info",
+               data: {
+            	   "marketplaceId":source.marketplaceId,
+            	   "query":source.query,
+            	   "queryContextId":source.queryContextId
+               },
                success: function(data){
                         $("#myDiv").html('<h2>'+data+'</h2>');
                   }

@@ -2,6 +2,7 @@ package io.renren.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,18 @@ public final class MwsConfigBuilder {
 
 	@Autowired
 	private MwsSellerService mwsSellerService;
+	
+	
+	public List<String> getMarketplaces(){
+		List<String> strList = new ArrayList<>(); 
+		return strList;
+	}
 
 	public MwsSellerEntity getMwsSellerEntity(){
 		Map<String, Object> source = new HashMap<>();
 		source.put("user_id", ShiroUtils.getUserEntity().getUserId().toString());
 		java.util.List<MwsSellerEntity> response = new ArrayList<MwsSellerEntity>();
-		mwsSellerService.queryList(source);
+		response = mwsSellerService.queryList(source);
 		if (response == null || response.isEmpty()) {
 			return null;
 		}
@@ -41,11 +48,11 @@ public final class MwsConfigBuilder {
 		return entity;
 	}
 	
-	public MarketplaceWebService getMwsService() {
+	public MarketplaceWebService getMwsService(String endpoint) {
 		Map<String, Object> source = new HashMap<>();
 		source.put("user_id", ShiroUtils.getUserEntity().getUserId().toString());
 		java.util.List<MwsSellerEntity> response = new ArrayList<MwsSellerEntity>();
-		mwsSellerService.queryList(source);
+		response = mwsSellerService.queryList(source);
 		if (response == null || response.isEmpty()) {
 			return null;
 		}
@@ -60,7 +67,11 @@ public final class MwsConfigBuilder {
 		 * Uncomment to set the correct MWS endpoint.
 		 ************************************************************************/
 		// US
-		config.setServiceURL("https://mws.amazonservices.com");
+		if(endpoint == null){
+			config.setServiceURL("https://mws.amazonservices.com");
+		}else{
+			config.setServiceURL(endpoint);
+		}
 
 		/************************************************************************
 		 * You can also try advanced configuration options. Available options

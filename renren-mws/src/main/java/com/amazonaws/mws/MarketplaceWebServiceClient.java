@@ -61,8 +61,11 @@ import java.util.regex.Pattern;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.codec.binary.Base64;
@@ -91,6 +94,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.protocol.HttpContext;
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.client.protocol.ClientContext;
 
@@ -142,8 +147,9 @@ import com.amazonaws.mws.model.SubmitFeedResponse;
 import com.amazonaws.mws.model.TypeList;
 import com.amazonaws.mws.model.UpdateReportAcknowledgementsRequest;
 import com.amazonaws.mws.model.UpdateReportAcknowledgementsResponse;
-import com.amazonaws.mws.myModel.ListMatchingProductsRequest;
-import com.amazonaws.mws.myModel.ListMatchingProductsResponse;
+import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
+import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
+import com.amazonaws.mws.model.response.ObjectFactory;
 
 /**
  * The Amazon Marketplace Web Service contain APIs for inventory and order
@@ -185,8 +191,9 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 	/** Initialize JAXBContext and Unmarshaller **/
 	static {
 		try {
-			jaxbContext = JAXBContext.newInstance("com.amazonaws.mws.model",
-					MarketplaceWebService.class.getClassLoader());
+//			jaxbContext = JAXBContext.newInstance("com.amazonaws.mws.model",
+//					MarketplaceWebService.class.getClassLoader());
+			jaxbContext = JAXBContext.newInstance("com.amazonaws.mws.model.response",ObjectFactory.class.getClassLoader());
 		} catch (JAXBException ex) {
 			throw new ExceptionInInitializerError(ex);
 		}
@@ -2145,6 +2152,8 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 					if (!isStreamingResponse) {
 						// SubmitFeed
 						responseBodyString = getResponsBodyAsString(postResponse.getEntity().getContent());
+//						responseBodyString = responseBodyString.replaceAll("xmlns([^ ]*)=([^ ]*)http([^>^\"]*)\"", "");
+						log.debug(responseBodyString);
 						assert (responseBodyString != null);
 					}
 
@@ -2158,8 +2167,21 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 								"Received Response. Status: " + status + ". " + "Response Body: " + responseBodyString);
 
 						log.debug("Attempting to unmarshal into the " + actionName + "Response type...");
-						response = clazz.cast(
-								getUnmarshaller().unmarshal(new StreamSource(new StringReader(responseBodyString))));
+						//final SAXParserFactory sax = SAXParserFactory.newInstance();  
+						//sax.setNamespaceAware(false);// 忽略命名空间  
+						//final XMLReader xmlReader = sax.newSAXParser().getXMLReader(); 
+						//final SAXSource saxSource = new SAXSource(xmlReader, new InputSource(new StringReader(responseBodyString)));  
+//						JAXBContext jaxbC = JAXBContext.newInstance("com.amazonaws.mws.model.response",ObjectFactory.class.getClassLoader());
+//						Unmarshaller us = jaxbC.createUnmarshaller();
+//						@SuppressWarnings("unchecked")
+//						JAXBElement<ListMatchingProductsResponse> object =  (JAXBElement<ListMatchingProductsResponse>) us.unmarshal(new StringReader(responseBodyString));
+//						ListMatchingProductsResponse response2 = object.getValue();
+//						response2.toString();
+						//Object object =  ()us.unmarshal(saxSource);
+//						ListMatchingProductsResponse response2 = object
+						@SuppressWarnings("unchecked")
+						JAXBElement<ListMatchingProductsResponse> object = (JAXBElement<ListMatchingProductsResponse>) getUnmarshaller().unmarshal(new StringReader(responseBodyString));
+						response = clazz.cast(object.getValue());
 						responseHeaderMetadataSetter.invoke(response, responseHeaderMetadata);
 
 						log.debug("Unmarshalled response into " + actionName + "Response type.");
