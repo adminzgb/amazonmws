@@ -33,6 +33,7 @@ public final class MwsConfigBuilder {
 	
 	public List<String> getMarketplaces(){
 		List<String> strList = new ArrayList<>(); 
+		
 		return strList;
 	}
 
