@@ -29,14 +29,23 @@ public final class MwsConfigBuilder {
 
 	@Autowired
 	private MwsSellerService mwsSellerService;
-	
-	
-	public List<String> getMarketplaces(){
-		List<String> strList = new ArrayList<>(); 
+
+	public List<String> getMarketplaces() {
+		List<String> strList = new ArrayList<>();
+		MwsSellerEntity entity = getMwsSellerEntity();
+		if (entity == null) {
+			return strList;
+		}
+		if (entity.getMarketplaceIdCa() != null && !entity.getMarketplaceIdCa().equals("")) {
+			strList.add("加拿大");
+		}
+		if (entity.getMarketplaceIdUs() != null && !entity.getMarketplaceIdUs().equals("")) {
+			strList.add("美国");
+		}
 		return strList;
 	}
 
-	public MwsSellerEntity getMwsSellerEntity(){
+	public MwsSellerEntity getMwsSellerEntity() {
 		Map<String, Object> source = new HashMap<>();
 		source.put("user_id", ShiroUtils.getUserEntity().getUserId().toString());
 		java.util.List<MwsSellerEntity> response = new ArrayList<MwsSellerEntity>();
@@ -47,7 +56,7 @@ public final class MwsConfigBuilder {
 		MwsSellerEntity entity = response.get(0);
 		return entity;
 	}
-	
+
 	public MarketplaceWebService getMwsService(String endpoint) {
 		Map<String, Object> source = new HashMap<>();
 		source.put("user_id", ShiroUtils.getUserEntity().getUserId().toString());
@@ -67,9 +76,9 @@ public final class MwsConfigBuilder {
 		 * Uncomment to set the correct MWS endpoint.
 		 ************************************************************************/
 		// US
-		if(endpoint == null){
+		if (endpoint == null) {
 			config.setServiceURL("https://mws.amazonservices.com");
-		}else{
+		} else {
 			config.setServiceURL(endpoint);
 		}
 
