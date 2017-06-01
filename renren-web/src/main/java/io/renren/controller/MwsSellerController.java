@@ -23,10 +23,8 @@ import io.renren.utils.ShiroUtils;
 
 /**
  * 
- * 
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2017-05-22 23:11:09
+ * @author Administrator
+ *
  */
 @RestController
 @RequestMapping("mwsseller")
