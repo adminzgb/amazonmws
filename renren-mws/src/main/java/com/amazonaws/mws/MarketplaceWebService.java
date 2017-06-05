@@ -20,6 +20,7 @@
 package com.amazonaws.mws;
 
 import com.amazonaws.mws.model.*;
+import com.amazonaws.mws.model.response.GetMatchingProductForIdRequest;
 import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
 import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
 
@@ -33,6 +34,8 @@ import java.util.concurrent.Future;
  * 
  */
 public interface  MarketplaceWebService {
+	
+	public void setEndpoint(String endpoint);
     
 
             
@@ -1400,5 +1403,7 @@ public interface  MarketplaceWebService {
     public Future<SubmitFeedResponse> submitFeedFromFileAsync(final SubmitFeedRequest request);
     
     
-    public ListMatchingProductsResponse ListMatchingProducts(ListMatchingProductsRequest request) throws MarketplaceWebServiceException ;
+    public ListMatchingProductsResponse listMatchingProducts(ListMatchingProductsRequest request) throws MarketplaceWebServiceException ;
+    
+    public ListMatchingProductsResponse getMatchingProductForId(GetMatchingProductForIdRequest request) throws MarketplaceWebServiceException ;
 }

@@ -181,7 +181,7 @@ public class IdList {
      * returns inner properties representation only
      *
      */
-    protected String toJSONFragment() {
+    public String toJSONFragment() {
         StringBuffer json = new StringBuffer();
         boolean first = true;
         if (isSetId()) {

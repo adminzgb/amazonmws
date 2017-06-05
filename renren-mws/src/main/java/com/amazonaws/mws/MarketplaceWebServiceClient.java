@@ -147,6 +147,7 @@ import com.amazonaws.mws.model.SubmitFeedResponse;
 import com.amazonaws.mws.model.TypeList;
 import com.amazonaws.mws.model.UpdateReportAcknowledgementsRequest;
 import com.amazonaws.mws.model.UpdateReportAcknowledgementsResponse;
+import com.amazonaws.mws.model.response.GetMatchingProductForIdRequest;
 import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
 import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
 import com.amazonaws.mws.model.response.ObjectFactory;
@@ -3335,7 +3336,7 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 	}
 
 	@Override
-	public ListMatchingProductsResponse ListMatchingProducts(ListMatchingProductsRequest request) throws MarketplaceWebServiceException {
+	public ListMatchingProductsResponse listMatchingProducts(ListMatchingProductsRequest request) throws MarketplaceWebServiceException {
 		return invoke(ListMatchingProductsResponse.class, convertListMatchingProducts(request));		
 	}
 	
@@ -3357,6 +3358,46 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 		}
 		if (request.isSetQueryContextId()) {
 			params.put("Query", request.getQueryContextId());
+		}
+		if (request.isSetMarketplaceId()) {
+			params.put("MarketplaceId", request.getMarketplaceId());
+		}
+		return params;
+	}
+
+	@Override
+	public void setEndpoint(String endpoint) {
+		this.config.setServiceURL(endpoint);
+	}
+
+	@Override
+	public ListMatchingProductsResponse getMatchingProductForId(GetMatchingProductForIdRequest request)
+			throws MarketplaceWebServiceException {
+		return invoke(ListMatchingProductsResponse.class, converGetMatchingProductForId(request));
+	}
+	
+	/**
+	 * Convert GetFeedSubmissionCountRequest to name value pairs
+	 */
+	private Map<String, String> converGetMatchingProductForId(GetMatchingProductForIdRequest request) {
+
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("Action", "GetMatchingProductForId");
+		if (request.isSetSellerId()) {
+			params.put("SellerId", request.getSellerId());
+		}
+		if (request.isSetMWSAuthToken()) {
+			params.put("MWSAuthToken", request.getMWSAuthToken());
+		}
+		if (request.isSetIdType()) {
+			params.put("IdType", request.getIdType());
+		}
+		if (request.isSetIdList()) {
+			IdList idList = request.getIdList();
+			java.util.List<String> typeList = idList.getId();
+			for (String type : typeList) {
+				params.put("IdList" + "." + "Id" + "." + (typeList.indexOf(type) + 1), type);
+			}
 		}
 		if (request.isSetMarketplaceId()) {
 			params.put("MarketplaceId", request.getMarketplaceId());

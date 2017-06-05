@@ -30,7 +30,7 @@ public class MarketplaceWebServiceConfig {
     private int connectionTimeout = 50000;
     private int socketTimeout = 50000;
     private String serviceVersion = "2011-10-01";
-    private String serviceURL = null;
+    private String serviceURL = "https://mws.amazonservices.com/";
     private String userAgent = null;
     private String signatureMethod = "HmacSHA256";
     private String proxyHost = null;

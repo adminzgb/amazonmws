@@ -15,6 +15,10 @@ import com.amazonaws.mws.MarketplaceWebServiceConfig;
 import io.renren.entity.MwsSellerEntity;
 import io.renren.service.MwsSellerService;
 import io.renren.utils.ShiroUtils;
+import io.renren.utils.SpringContextUtils;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
  * mws商家信息生成器
@@ -25,10 +29,10 @@ import io.renren.utils.ShiroUtils;
 @Service
 public final class MwsConfigBuilder {
 
-	private MarketplaceWebService service;
+	private static MarketplaceWebService service;
 
-	@Autowired
-	private MwsSellerService mwsSellerService;
+	private static MwsSellerService mwsSellerService = (MwsSellerService) new FileSystemXmlApplicationContext(
+			"classpath*:spring-*.xml","classpath*:renren-*.xml").getBean("mwsSellerService");
 
 	public List<String> getMarketplaces() {
 		List<String> strList = new ArrayList<>();
@@ -47,7 +51,8 @@ public final class MwsConfigBuilder {
 
 	public MwsSellerEntity getMwsSellerEntity() {
 		Map<String, Object> source = new HashMap<>();
-		source.put("user_id", ShiroUtils.getUserEntity().getUserId().toString());
+		//source.put("user_id", ShiroUtils.getUserEntity().getUserId().toString());
+		source.put("user_id", "1");
 		java.util.List<MwsSellerEntity> response = new ArrayList<MwsSellerEntity>();
 		response = mwsSellerService.queryList(source);
 		if (response == null || response.isEmpty()) {
@@ -57,45 +62,23 @@ public final class MwsConfigBuilder {
 		return entity;
 	}
 
-	public MarketplaceWebService getMwsService(String endpoint) {
+	public static MarketplaceWebService getMwsService() {
+		return service;
+	}
+
+	static {
 		Map<String, Object> source = new HashMap<>();
-		source.put("user_id", ShiroUtils.getUserEntity().getUserId().toString());
+		// source.put("user_id",
+		// ShiroUtils.getUserEntity().getUserId().toString());
+		source.put("user_id", "1");
 		java.util.List<MwsSellerEntity> response = new ArrayList<MwsSellerEntity>();
 		response = mwsSellerService.queryList(source);
-		if (response == null || response.isEmpty()) {
-			return null;
-		}
 		MwsSellerEntity entity = response.get(0);
 		final String accessKeyId = entity.getAccessKeyId();
 		final String secretAccessKey = entity.getSecretAccessKey();
 		final String appName = entity.getAppName();
 		final String appVersion = entity.getAppVersion();
 		MarketplaceWebServiceConfig config = new MarketplaceWebServiceConfig();
-
-		/************************************************************************
-		 * Uncomment to set the correct MWS endpoint.
-		 ************************************************************************/
-		// US
-		if (endpoint == null) {
-			config.setServiceURL("https://mws.amazonservices.com");
-		} else {
-			config.setServiceURL(endpoint);
-		}
-
-		/************************************************************************
-		 * You can also try advanced configuration options. Available options
-		 * are:
-		 *
-		 * - Signature Version - Proxy Host and Proxy Port - User Agent String
-		 * to be sent to Marketplace Web Service
-		 *
-		 ***********************************************************************/
-
-		/************************************************************************
-		 * Instantiate Http Client Implementation of Marketplace Web Service
-		 ***********************************************************************/
-
 		service = new MarketplaceWebServiceClient(accessKeyId, secretAccessKey, appName, appVersion, config);
-		return service;
 	}
 }

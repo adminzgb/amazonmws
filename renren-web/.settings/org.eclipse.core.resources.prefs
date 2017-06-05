@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WEB-INF/page/generator/getMatchingProductForId.html=UTF-8
 encoding//src/main/webapp/WEB-INF/page/generator/listMatchingProducts.html=UTF-8
 encoding//src/main/webapp/WEB-INF/page/generator/mwsseller.html=UTF-8

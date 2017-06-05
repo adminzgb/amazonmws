@@ -28,7 +28,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.amazonaws.mws.*;
 import com.amazonaws.mws.model.*;
-import com.amazonaws.mws.mock.MarketplaceWebServiceMock;
 
 /**
  *

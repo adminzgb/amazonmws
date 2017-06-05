@@ -7,7 +7,7 @@
 	<div id="rrapp">
 
 		<div class="panel panel-default">
-			<div class="panel-heading">根据搜索查询，返回商品列表</div>
+			<div class="panel-heading">根据 ASIN、GCID、SellerSKU、UPC、EAN、ISBN 和 JAN，返回商品及其属性列表</div>
 			<div class="form-group">
 				<div class="col-sm-2 control-label">商城</div>
 				<div class="col-sm-10">
@@ -19,17 +19,24 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-2 control-label">关键词</div>
+				<div class="col-sm-2 control-label">商品编码的类型</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="query" id="query"
-						placeholder="关键词" />
+					<select class="form-control" id="idType">
+						<option>ASIN</option>
+						<option>GCID</option>
+						<option>SellerSKU</option>
+						<option>JAN</option>
+						<option>ISBN</option>
+						<option>EAN</option>
+						<option>UPC</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-2 control-label">搜索范围</div>
+				<div class="col-sm-2 control-label">商品编码</div>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="queryContextId"
-						id="queryContextId" placeholder="Apparel（服饰），Appliances（家电）" />
+						id="idList" placeholder="商品编码" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -60,17 +67,18 @@
 						var source = {};
 						source.marketplaceId = $(
 								"#marketplaces option:selected").val();
-						source.query = $("#query").val();
-						source.queryContextId = $("#queryContextId").val();
+						source.idList = $("#idList").val();
+						source.idType = $(
+						"#idType option:selected").val();
 						$.ajax({
 							type : "POST",
 							contentType : "application/x-www-form-urlencoded",
 							dataType : "json",
-							url : "../mwsseller/info",
+							url : "../mwsseller/singleInfo",
 							data : {
 								"marketplaceId" : source.marketplaceId,
-								"query" : source.query,
-								"queryContextId" : source.queryContextId
+								"idType" : source.idType,
+								"idList" : source.idList
 							},
 							success : function(data) {
 								$(".tab-content").removeClass("hidden");
@@ -99,7 +107,7 @@
 							}
 						});
 					});
-
+			
 			$.ajax({
 				type : "GET",
 				contentType : "application/x-www-form-urlencoded",

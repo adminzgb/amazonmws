@@ -26,7 +26,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import com.amazonaws.mws.*;
 import com.amazonaws.mws.model.*;
-import com.amazonaws.mws.mock.MarketplaceWebServiceMock;
 
 /**
  *
