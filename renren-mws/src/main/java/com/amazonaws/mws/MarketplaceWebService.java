@@ -21,6 +21,7 @@ package com.amazonaws.mws;
 
 import com.amazonaws.mws.model.*;
 import com.amazonaws.mws.model.response.GetMatchingProductForIdRequest;
+import com.amazonaws.mws.model.response.GetMatchingProductForIdResponse;
 import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
 import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
 
@@ -1405,5 +1406,5 @@ public interface  MarketplaceWebService {
     
     public ListMatchingProductsResponse listMatchingProducts(ListMatchingProductsRequest request) throws MarketplaceWebServiceException ;
     
-    public ListMatchingProductsResponse getMatchingProductForId(GetMatchingProductForIdRequest request) throws MarketplaceWebServiceException ;
+    public GetMatchingProductForIdResponse getMatchingProductForId(GetMatchingProductForIdRequest request) throws MarketplaceWebServiceException ;
 }

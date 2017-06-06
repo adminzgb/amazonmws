@@ -148,6 +148,7 @@ import com.amazonaws.mws.model.TypeList;
 import com.amazonaws.mws.model.UpdateReportAcknowledgementsRequest;
 import com.amazonaws.mws.model.UpdateReportAcknowledgementsResponse;
 import com.amazonaws.mws.model.response.GetMatchingProductForIdRequest;
+import com.amazonaws.mws.model.response.GetMatchingProductForIdResponse;
 import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
 import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
 import com.amazonaws.mws.model.response.ObjectFactory;
@@ -3371,9 +3372,9 @@ public class MarketplaceWebServiceClient implements MarketplaceWebService {
 	}
 
 	@Override
-	public ListMatchingProductsResponse getMatchingProductForId(GetMatchingProductForIdRequest request)
+	public GetMatchingProductForIdResponse getMatchingProductForId(GetMatchingProductForIdRequest request)
 			throws MarketplaceWebServiceException {
-		return invoke(ListMatchingProductsResponse.class, converGetMatchingProductForId(request));
+		return invoke(GetMatchingProductForIdResponse.class, converGetMatchingProductForId(request));
 	}
 	
 	/**

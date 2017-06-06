@@ -26,6 +26,7 @@ import com.amazonaws.mws.MarketplaceWebServiceConfig;
 import com.amazonaws.mws.MarketplaceWebServiceException;
 import com.amazonaws.mws.model.ResponseMetadata;
 import com.amazonaws.mws.model.response.GetMatchingProductForIdRequest;
+import com.amazonaws.mws.model.response.GetMatchingProductForIdResponse;
 import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
 import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
 
@@ -204,10 +205,10 @@ public class ListMatchingProductsSample {
      * @param service instance of MarketplaceWebService service
      * @param request Action to invoke
      */
-    public static ListMatchingProductsResponse invokeGetMatchingProductForId(MarketplaceWebService service, GetMatchingProductForIdRequest request) {
+    public static GetMatchingProductForIdResponse invokeGetMatchingProductForId(MarketplaceWebService service, GetMatchingProductForIdRequest request) {
         try {
         	service.setEndpoint("https://mws.amazonservices.com/Products/2011-10-01");
-            ListMatchingProductsResponse response = service.getMatchingProductForId(request);
+        	GetMatchingProductForIdResponse response = service.getMatchingProductForId(request);
             
 
             System.out.println ("GetMatchingProductForId Action Response");
@@ -216,7 +217,7 @@ public class ListMatchingProductsSample {
 
             System.out.print("    ListMatchingProductsResponse");
             System.out.println();
-            if (response.isSetListMatchingProductsResult()) {
+            if (response.isSetGetMatchingProductResult()) {
                 System.out.print("        GetFeedSubmissionCountResult");
                 System.out.println();
 //                GetFeedSubmissionCountResult  getFeedSubmissionCountResult = response.getGetFeedSubmissionCountResult();

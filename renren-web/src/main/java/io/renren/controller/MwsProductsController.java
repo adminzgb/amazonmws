@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazonaws.common.Contants;
+import com.amazonaws.common.QueryContextIdContants;
 import com.amazonaws.mws.MarketplaceWebService;
 import com.amazonaws.mws.model.IdList;
 import com.amazonaws.mws.model.response.GetMatchingProductForIdRequest;
+import com.amazonaws.mws.model.response.GetMatchingProductForIdResponse;
 import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
 import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
 import com.amazonaws.mws.model.response.ProductType;
@@ -22,6 +25,7 @@ import com.amazonaws.mws.samples.mySamples.ListMatchingProductsSample;
 import io.renren.common.MwsConfigBuilder;
 import io.renren.dto.GetMatchingProductForIdDto;
 import io.renren.dto.MatchProductDto;
+import io.renren.dto.MatchingProductDetailDto;
 import io.renren.entity.MwsSellerEntity;
 
 @RestController
@@ -33,12 +37,13 @@ public class MwsProductsController {
 
 	/**
 	 * 获取单个
+	 * 
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping(path = "/singleInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<MatchProductDto> singleInfo(GetMatchingProductForIdDto param){
+	public List<MatchingProductDetailDto> singleInfo(GetMatchingProductForIdDto param) {
 		GetMatchingProductForIdRequest request = new GetMatchingProductForIdRequest();
 		request.setIdType(param.getIdType());
 		IdList idList = new IdList();
@@ -55,20 +60,19 @@ public class MwsProductsController {
 		request.setSellerId(mwsSellerEntity.getSellerId());
 		request.setMWSAuthToken(mwsSellerEntity.getMwsAuthToken());
 		MarketplaceWebService service = MwsConfigBuilder.getMwsService();
-		List<MatchProductDto> matchProductDtos = new ArrayList<>();
-		ListMatchingProductsResponse response = ListMatchingProductsSample.invokeGetMatchingProductForId(service, request);
-		// return response;
-		List<ProductType> productTypes = response.getListMatchingProductsResult().getProducts().getProduct();
+		List<MatchingProductDetailDto> matchProductDtos = new ArrayList<>();
+		GetMatchingProductForIdResponse response = ListMatchingProductsSample.invokeGetMatchingProductForId(service,
+				request);
+		List<ProductType> productTypes = response.getGetMatchingProductResult().getProducts().getProduct();
 		for (ProductType p : productTypes) {
-			MatchProductDto matchProductDto = new MatchProductDto();
+			MatchingProductDetailDto matchProductDto = new MatchingProductDetailDto();
 			try {
-				matchProductDto.setASIN(p.getIdentifiers().getMarketplaceASIN().getASIN());
-
-				matchProductDto
-						.setPrice(p.getAttributeSets().getAttributeSet().get(0).getValue().getListPrice().getAmount());
-				matchProductDto.setSmallImg(
-						p.getAttributeSets().getAttributeSet().get(0).getValue().getSmallImage().getURL());
-				matchProductDto.setBrandName(p.getAttributeSets().getAttributeSet().get(0).getValue().getBrand());
+				// matchProductDto.setASIN(p.getIdentifiers().getMarketplaceASIN().getASIN());
+				//
+				// matchProductDto.setSmallImg(
+				// p.getAttributeSets().getAttributeSet().get(0).getValue().getSmallImage().getURL());
+				// matchProductDto.setBrandName(p.getAttributeSets().getAttributeSet().get(0).getValue().getBrand());
+				matchProductDto = MwsConfigBuilder.buildProductDetail(p.getIdentifiers(), p, p.getSalesRankings());
 			} catch (NullPointerException e) {
 				e.printStackTrace();
 			}
@@ -76,16 +80,15 @@ public class MwsProductsController {
 		}
 		return matchProductDtos;
 	}
-	
-	
+
 	/**
 	 * 信息
 	 */
 	@RequestMapping(path = "/info", method = RequestMethod.POST)
 	@ResponseBody
-	public List<MatchProductDto> info(ListMatchingProductsRequest request, HttpServletRequest request2) {
+	public List<MatchingProductDetailDto> info(ListMatchingProductsRequest request, HttpServletRequest request2) {
 		MwsSellerEntity mwsSellerEntity = builder.getMwsSellerEntity();
-		List<MatchProductDto> matchProductDtos = new ArrayList<>();
+		List<MatchingProductDetailDto> matchProductDtos = new ArrayList<>();
 		if (request.getMarketplaceId().equals("美国")) {
 			request.setMarketplaceId(mwsSellerEntity.getMarketplaceIdUs());
 		} else if (request.getMarketplaceId().equals("加拿大")) {
@@ -99,15 +102,14 @@ public class MwsProductsController {
 		// return response;
 		List<ProductType> productTypes = response.getListMatchingProductsResult().getProducts().getProduct();
 		for (ProductType p : productTypes) {
-			MatchProductDto matchProductDto = new MatchProductDto();
+			MatchingProductDetailDto matchProductDto = new MatchingProductDetailDto();
 			try {
-				matchProductDto.setASIN(p.getIdentifiers().getMarketplaceASIN().getASIN());
-
-				matchProductDto
-						.setPrice(p.getAttributeSets().getAttributeSet().get(0).getValue().getListPrice().getAmount());
-				matchProductDto.setSmallImg(
-						p.getAttributeSets().getAttributeSet().get(0).getValue().getSmallImage().getURL());
-				matchProductDto.setBrandName(p.getAttributeSets().getAttributeSet().get(0).getValue().getBrand());
+				// matchProductDto.setASIN(p.getIdentifiers().getMarketplaceASIN().getASIN());
+				//
+				// matchProductDto.setSmallImg(
+				// p.getAttributeSets().getAttributeSet().get(0).getValue().getSmallImage().getURL());
+				// matchProductDto.setBrandName(p.getAttributeSets().getAttributeSet().get(0).getValue().getBrand());
+				matchProductDto = MwsConfigBuilder.buildProductDetail(p.getIdentifiers(), p, p.getSalesRankings());
 			} catch (NullPointerException e) {
 				e.printStackTrace();
 			}
@@ -120,6 +122,17 @@ public class MwsProductsController {
 	@ResponseBody
 	public List<String> listMarketplaces() {
 		return builder.getMarketplaces();
+	}
+
+	@RequestMapping(path = "/listQueryContextId", method = RequestMethod.GET)
+	@ResponseBody
+	public List<String> listQueryContextId(String marketplaceId) {
+		if (marketplaceId.equals("美国")) {
+			marketplaceId = Contants.MARKETPLACE_ID_US;
+		} else {
+			marketplaceId = Contants.MARKETPLACE_ID_CA;
+		}
+		return QueryContextIdContants.getQueryContextByMarket(marketplaceId);
 	}
 
 }
