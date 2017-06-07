@@ -1,25 +1,26 @@
 
-package com.amazonaws.mws.model;
+package com.amazonaws.mws.model.response;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.amazonaws.mws.model.IdList;
 
 
 /**
- * <p>Java class for IdList complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="IdList">
+ * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Id" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
+ *         &lt;element name="Count" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,19 +32,20 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "IdList", propOrder = {
-    "id"
+@XmlType(name = "", propOrder = {
+    "products"
 })
-public class IdList {
+@XmlRootElement(name = "GetMatchingProductForIdResult")
+public class GetMatchingProductForIdResult {
 
-    @XmlElement(name = "Id", required = true)
-    protected List<String> id;
+    @XmlElement(name = "Products")
+    protected ProductList products;
 
     /**
      * Default constructor
      * 
      */
-    public IdList() {
+    public GetMatchingProductForIdResult() {
         super();
     }
 
@@ -51,71 +53,40 @@ public class IdList {
      * Value constructor
      * 
      */
-    public IdList(final List<String> id) {
-        this.id = id;
+    public GetMatchingProductForIdResult(final ProductList productList) {
+        this.products = productList;
     }
 
     /**
-     * Gets the value of the id property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the id property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getId().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link String }
-     * 
+     * Gets the value of the count property.
      * 
      */
-    public List<String> getId() {
-        if (id == null) {
-            id = new ArrayList<String>();
-        }
-        return this.id;
-    }
-
-    public boolean isSetId() {
-        return ((this.id!= null)&&(!this.id.isEmpty()));
-    }
-
-    public void unsetId() {
-        this.id = null;
+    public ProductList getProducts() {
+        return products;
     }
 
     /**
-     * Sets the value of the Id property.
+     * Sets the value of the count property.
      * 
-     * @param values
+     */
+    public void setProducts(ProductList productList) {
+        this.products = productList;
+    }
+
+    public boolean isSetProducts() {
+        return true;
+    }
+
+    /**
+     * Sets the value of the Count property.
+     * 
+     * @param value
      * @return
      *     this instance
      */
-    public IdList withId(String... values) {
-        for (String value: values) {
-            getId().add(value);
-        }
+    public GetMatchingProductForIdResult withCount(ProductList productList) {
+        setProducts(productList);
         return this;
-    }
-
-    /**
-     * Sets the value of the id property.
-     * 
-     * @param id
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setId(List<String> id) {
-        this.id = id;
     }
     
 
@@ -129,12 +100,11 @@ public class IdList {
      */
     protected String toXMLFragment() {
         StringBuffer xml = new StringBuffer();
-        java.util.List<String> idList  =  getId();
-        for (String id : idList) { 
-            xml.append("<Id>");
-            xml.append(escapeXML(id));
-            xml.append("</Id>");
-        }	
+        if (isSetProducts()) {
+            xml.append("<Products>");
+            xml.append(getProducts()+ "");
+            xml.append("</Products>");
+        }
         return xml.toString();
     }
 
@@ -181,22 +151,20 @@ public class IdList {
      * returns inner properties representation only
      *
      */
-    public String toJSONFragment() {
-        StringBuffer json = new StringBuffer();
-        boolean first = true;
-        if (isSetId()) {
-            if (!first) json.append(", ");
-            json.append("\"Id\" : [");
-            java.util.List<String> idList  =  getId();
-            for (String id : idList) {
-                if (idList.indexOf(id) > 0) json.append(", ");
-                    json.append(quoteJSON(id));
-            }
-            json.append("]");
-            first = false;
-        }
-        return json.toString();
-    }
+//    protected String toJSONFragment() {
+//        StringBuffer json = new StringBuffer();
+//        boolean first = true;
+//        if (isSetProducts()) {
+//            if (!first) json.append(", ");
+//            json.append("\"Products\" : {");
+//            ProductList productList = getProducts();
+//
+//            json.append(productList.);
+//            json.append("}");
+//            first = false;
+//        }
+//        return json.toString();
+//    }
 
     /**
      *
@@ -244,6 +212,7 @@ public class IdList {
         sb.append("\"");
         return sb.toString();
     }
+
 
 
 }

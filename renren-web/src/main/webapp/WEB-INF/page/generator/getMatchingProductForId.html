@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title> #parse("sys/header.html")
+</head>
+<body>
+	<div id="rrapp">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">根据 ASIN、GCID、SellerSKU、UPC、EAN、ISBN 和 JAN，返回商品及其属性列表</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">商城</div>
+				<div class="col-sm-10">
+					<!-- <input type="text" class="form-control" name="marketplaceId" id="marketplaceId" 
+							placeholder="marketplaceId" /> -->
+					<select class="form-control" id="marketplaces">
+
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">商品编码的类型</div>
+				<div class="col-sm-10">
+					<select class="form-control" id="idType">
+						<option>ASIN</option>
+						<option>GCID</option>
+						<option>SellerSKU</option>
+						<option>JAN</option>
+						<option>ISBN</option>
+						<option>EAN</option>
+						<option>UPC</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">商品编码</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="queryContextId"
+						id="idList" placeholder="商品编码" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div>
+				<input type="button" class="btn btn-primary" name="saveOrUpdate" id="sure"
+					value="确定" /> <input type="button" class="btn btn-warning"
+					name="reload" value="返回" />
+			</div>
+		</div>
+
+		<!--  -->
+
+		<!-- Tab panels -->
+		<div class="tab-content hidden">
+
+			<div role="tabpanel" class="tab-pane active" id="panel-1">
+				<div class="row masonry-container">
+				</div>
+				<!--End masonry-container -->
+			</div>
+			<!--End panel-1 -->
+		</div>
+</div>
+
+<div>
+
+</div>
+		<script type="text/javascript">
+			$("input[name='saveOrUpdate']").click(
+					function() {
+						//Ajax调用处理
+						var source = {};
+						source.marketplaceId = $(
+								"#marketplaces option:selected").val();
+						source.idList = $("#idList").val();
+						source.idType = $(
+						"#idType option:selected").val();
+						$.ajax({
+							type : "POST",
+							contentType : "application/x-www-form-urlencoded",
+							dataType : "json",
+							url : "../mwsseller/singleInfo",
+							data : {
+								"marketplaceId" : source.marketplaceId,
+								"idType" : source.idType,
+								"idList" : source.idList
+							},
+							success : function(data) {
+								$(".tab-content").removeClass("hidden");
+								var container = $('.masonry-container');
+								container.imagesLoaded( function () {
+								container.masonry({
+								columnWidth: '.item',
+								itemSelector: '.item'
+								});
+								});
+								for(var i = 0;i<data.length;i++){
+								$('.masonry-container').append("<div class=\"col-md-4 col-sm-6 item\"><div class=\"thumbnail\">"+
+								"<img src=\""+data[i].smallImg+"\" alt=\"\"><div class=\"caption\"><h3>"+data[i].brandName+"</h3>"+
+								"<p>价格： "+data[i].price+"</p><p>ASIN: "+data[i].aSIN+"</p><a href=\"#\" id=\""+data[i].aSIN+"\"class=\"btn btn-primary\""+ 
+								"role=\"button\">详情</a></p></div></div></div>");
+								
+								$("#"+data[i].aSIN).click(function(){
+									layer.open({
+										  type: 1,
+										  area: ['600px', '360px'],
+										  shadeClose: true, //点击遮罩关闭
+										  content: '\<\div style="padding:20px;">自定义内容\<\/div>'
+										  });
+								});
+								}
+							}
+						});
+					});
+			
+			$.ajax({
+				type : "GET",
+				contentType : "application/x-www-form-urlencoded",
+				dataType : "json",
+				url : "../mwsseller/listMP",
+				data : {},
+				success : function(data) {
+					for (var i = 0; i < data.length; i++) {
+						$("#marketplaces").append(
+								"<option>" + data[i] + "</option>");
+					}
+				}
+			});
+		</script>
+</body>
+</html>

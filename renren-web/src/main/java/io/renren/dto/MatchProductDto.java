@@ -16,11 +16,11 @@ public class MatchProductDto {
 		ASIN = aSIN;
 	}
 
-	public BigDecimal getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	
@@ -44,7 +44,7 @@ public class MatchProductDto {
 
 	private String ASIN;
 	
-	private BigDecimal price;
+	private String  price;
 	
 	private String smallImg;
 	

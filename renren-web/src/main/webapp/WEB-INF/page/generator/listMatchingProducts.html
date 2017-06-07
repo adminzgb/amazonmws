@@ -6,14 +6,14 @@
 <body>
 	<div id="rrapp">
 
-		<div class="panel panel-default">
+		<div class="panel panel-default" style="padding-bottom:20px">
 			<div class="panel-heading">根据搜索查询，返回商品列表</div>
-			<div class="form-group">
+			<div class="form-group" style="margin-top:10px">
 				<div class="col-sm-2 control-label">商城</div>
 				<div class="col-sm-10">
 					<!-- <input type="text" class="form-control" name="marketplaceId" id="marketplaceId" 
 							placeholder="marketplaceId" /> -->
-					<select class="form-control" id="marketplaces">
+					<select class="form-control" id="marketplaces" style="margin-bottom:10px">
 
 					</select>
 				</div>
@@ -22,21 +22,23 @@
 				<div class="col-sm-2 control-label">关键词</div>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="query" id="query"
-						placeholder="关键词" />
+						placeholder="关键词" style="margin-bottom:10px"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-2 control-label">搜索范围</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="queryContextId"
-						id="queryContextId" placeholder="Apparel（服饰），Appliances（家电）" />
+					<select class="form-control" name="queryContextId"
+						id="queryContextId">
+
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-2 control-label"></div>
 				<input type="button" class="btn btn-primary" name="saveOrUpdate" id="sure"
-					value="确定" /> <input type="button" class="btn btn-warning"
-					name="reload" value="返回" />
+					value="确定" style="margin-top:10px"/> <input type="button" class="btn btn-warning"
+					name="reload" value="返回" style="margin-top:10px"/>
 			</div>
 		</div>
 
@@ -53,7 +55,68 @@
 			<!--End panel-1 -->
 		</div>
 </div>
+</body>
+<div class="container hidden" id="detailPanel">
+<div class="form-group">
+					<label>商品图片</label>
+					<img src="" id="imgUrl_panel"/>
+					</div>
+					<div class="form-group">
+					<label>商品名称</label>
+					<input type="text" class="form-control" readonly name="title" id="title_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>价格</label>
+					<input type="text" class="form-control" readonly name="price" id="price_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>描述</label>
+					<input type="text" class="form-control" readonly name="desc" id="desc_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>五要素</label>
+					<textarea class="form-control" readonly name="features" id="features_panel" style="margin-bottom:10px">
+					</textarea>
+					</div>
+					<div class="form-group">
+					<label>品牌</label>
+					<input type="text" class="form-control" readonly name="brandName" id="brandName_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>sku</label>
+					<input type="text" class="form-control" readonly name="sku" id="sku_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>asin</label>
+					<input type="text" class="form-control" readonly name="asin" id="asin_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>分类</label>
+					<input type="text" class="form-control" readonly name="cata" id="cata_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>排名</label>
+					<input type="text" class="form-control" readonly name="rank" id="rank_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>上线时间</label>
+					<input type="text" class="form-control" readonly name="onlineTime" id="onlineTime_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>评论人数</label>
+					<input type="text" class="form-control" readonly name="reviewCount" id="reviewCount_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>评分</label>
+					<input type="text" class="form-control" readonly name="score" id="score_panel" style="margin-bottom:10px"/>
+					</div>
+					<div class="form-group">
+					<label>标签</label>
+					<input type="text" class="form-control" readonly name="label" id="label_panel" style="margin-bottom:10px"/>
+					</div>
+			</div>
 		<script type="text/javascript">
+		var resopnse = [];
 			$("input[name='saveOrUpdate']").click(
 					function() {
 						//Ajax调用处理
@@ -62,6 +125,7 @@
 								"#marketplaces option:selected").val();
 						source.query = $("#query").val();
 						source.queryContextId = $("#queryContextId").val();
+						var index = null;
 						$.ajax({
 							type : "POST",
 							contentType : "application/x-www-form-urlencoded",
@@ -72,17 +136,76 @@
 								"query" : source.query,
 								"queryContextId" : source.queryContextId
 							},
+							beforeSend: function () {  
+								index = layer.load(0, {shade: false});  
+						    }, 
+						    complete:function(){
+						    	layer.close(index);
+						    },
 							success : function(data) {
+								response = data;
 								$(".tab-content").removeClass("hidden");
+								$('.masonry-container').children(".item").remove();
 								for(var i = 0;i<data.length;i++){
 								$('.masonry-container').append("<div class=\"col-md-4 col-sm-6 item\"><div class=\"thumbnail\">"+
-								"<img src=\""+data[i].smallImg+"\" alt=\"\"><div class=\"caption\"><h3>"+data[i].brandName+"</h3>"+
-								"<p>价格： "+data[i].price+"</p><p>ASIN: "+data[i].aSIN+"</p><a href=\"#\" class=\"btn btn-primary\""+ 
+								"<img src=\""+data[i].imgUrl+"\" alt=\"\"><div class=\"caption\"><h3>"+data[i].title+"</h3>"+
+								"<p>价格： "+data[i].price+"</p><p>ASIN: "+data[i].asin+"</p><a href=\"#\" id=\""+data[i].asin+"\"class=\"btn btn-primary\""+ 
 								"role=\"button\">详情</a></p></div></div></div>");
+								
+								$("#"+data[i].asin).click(function(){
+									/* layer.open({
+										  type: 1,
+										  area: ['600px', '360px'],
+										  shadeClose: true, //点击遮罩关闭
+										  content: '\<\div style="padding:20px;">自定义内容\<\/div>'
+										  }); */
+										  var index = 0;
+										  for(var i = 0;i<response.length;i++){
+											  if(response[i].asin == $(this).attr("id")){
+												  index = i;
+												  break;
+											  }
+										  }
+										  $("#imgUrl_panel").attr("src",response[index].imgUrl);
+										 $("#title_panel").val(response[index].title);
+										 $("#price_panel").val(response[index].price);
+										 $("#desc_panel").val(response[index].desc);
+										 var features = "";
+										 for(var i=0;i<response[index].features;i++){
+											 features+=response[index].features[i];
+											 features+="; "
+										 }
+										 $("#features_panel").val(response[index].features);
+										 $("#brandName_panel").val(response[index].brandName);
+										 $("#asin_panel").val(response[index].asin);
+										 $("#cata_panel").val(response[index].cata);
+										 $("#detailPanel").removeClass("hidden");
+									layer.open({
+										  type: 1,
+										  title: "商品详情",
+										  shade: false,
+										  content: $('#detailPanel'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+										  success: function(layero, index){
+											  },
+										  cancel: function(index, layero){ 
+											  $("#detailPanel").addClass("hidden");
+										  }
+										});
+								});
 								}
+								$('.item').each(function(){
+									$(this).height(380);
+								});
 							}
 						});
 					});
+			var container = $('.masonry-container');
+			  container.imagesLoaded( function () {
+				container.masonry({
+				columnWidth: '.item',
+				itemSelector: '.item'
+			  });
+			});
 
 			$.ajax({
 				type : "GET",
@@ -97,6 +220,25 @@
 					}
 				}
 			});
+			$("#marketplaces").change(function(){
+				$('#queryContextId').children(".option").remove();
+				$.ajax({
+					type : "GET",
+					contentType : "application/x-www-form-urlencoded",
+					dataType : "json",
+					url : "../mwsseller/listQueryContextId",
+					data : {
+						"marketplaceId":$("#marketplaces option:selected").val()
+					},
+					success : function(data) {
+						for (var i = 0; i < data.length; i++) {
+							$("#queryContextId").append(
+									"<option class=\"option\">" + data[i] + "</option>");
+						}
+					}
+				});
+				
+			});
 		</script>
-</body>
+
 </html>

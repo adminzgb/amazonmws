@@ -25,6 +25,8 @@ import com.amazonaws.mws.MarketplaceWebServiceClient;
 import com.amazonaws.mws.MarketplaceWebServiceConfig;
 import com.amazonaws.mws.MarketplaceWebServiceException;
 import com.amazonaws.mws.model.ResponseMetadata;
+import com.amazonaws.mws.model.response.GetMatchingProductForIdRequest;
+import com.amazonaws.mws.model.response.GetMatchingProductForIdResponse;
 import com.amazonaws.mws.model.response.ListMatchingProductsRequest;
 import com.amazonaws.mws.model.response.ListMatchingProductsResponse;
 
@@ -145,8 +147,8 @@ public class ListMatchingProductsSample {
      */
     public static ListMatchingProductsResponse invokeListMatchingProducts(MarketplaceWebService service, ListMatchingProductsRequest request) {
         try {
-
-            ListMatchingProductsResponse response = service.ListMatchingProducts(request);
+        	service.setEndpoint("https://mws.amazonservices.com/Products/2011-10-01");
+            ListMatchingProductsResponse response = service.listMatchingProducts(request);
             
 
             System.out.println ("ListMatchingProducts Action Response");
@@ -156,6 +158,66 @@ public class ListMatchingProductsSample {
             System.out.print("    ListMatchingProductsResponse");
             System.out.println();
             if (response.isSetListMatchingProductsResult()) {
+                System.out.print("        GetFeedSubmissionCountResult");
+                System.out.println();
+//                GetFeedSubmissionCountResult  getFeedSubmissionCountResult = response.getGetFeedSubmissionCountResult();
+//                if (getFeedSubmissionCountResult.isSetCount()) {
+//                    System.out.print("            Count");
+//                    System.out.println();
+//                    System.out.print("                " + getFeedSubmissionCountResult.getCount());
+//                    System.out.println();
+//                }
+            } 
+            if (response.isSetResponseMetadata()) {
+                System.out.print("        ResponseMetadata");
+                System.out.println();
+                ResponseMetadata  responseMetadata = response.getResponseMetadata();
+                if (responseMetadata.isSetRequestId()) {
+                    System.out.print("            RequestId");
+                    System.out.println();
+                    System.out.print("                " + responseMetadata.getRequestId());
+                    System.out.println();
+                }
+            } 
+            System.out.println();
+            System.out.println(response.getResponseHeaderMetadata());
+            System.out.println();
+            return response;
+
+        } catch (MarketplaceWebServiceException ex) {
+
+            System.out.println("Caught Exception: " + ex.getMessage());
+            System.out.println("Response Status Code: " + ex.getStatusCode());
+            System.out.println("Error Code: " + ex.getErrorCode());
+            System.out.println("Error Type: " + ex.getErrorType());
+            System.out.println("Request ID: " + ex.getRequestId());
+            System.out.print("XML: " + ex.getXML());
+            System.out.println("ResponseHeaderMetadata: " + ex.getResponseHeaderMetadata());
+            return null;
+        }
+    }
+    
+    
+    /**
+     * Get Feed Submission Count  request sample
+     * returns the number of feeds matching all of the specified criteria
+     *   
+     * @param service instance of MarketplaceWebService service
+     * @param request Action to invoke
+     */
+    public static GetMatchingProductForIdResponse invokeGetMatchingProductForId(MarketplaceWebService service, GetMatchingProductForIdRequest request) {
+        try {
+        	service.setEndpoint("https://mws.amazonservices.com/Products/2011-10-01");
+        	GetMatchingProductForIdResponse response = service.getMatchingProductForId(request);
+            
+
+            System.out.println ("GetMatchingProductForId Action Response");
+            System.out.println ("=============================================================================");
+            System.out.println ();
+
+            System.out.print("    ListMatchingProductsResponse");
+            System.out.println();
+            if (response.isSetGetMatchingProductResult()) {
                 System.out.print("        GetFeedSubmissionCountResult");
                 System.out.println();
 //                GetFeedSubmissionCountResult  getFeedSubmissionCountResult = response.getGetFeedSubmissionCountResult();
