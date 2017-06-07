@@ -276,8 +276,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>${java-version}</source>
-					<target>${java-version}</target>
+						<source>1.7</source>
+					<target>1.7</target>
 					<!-- true:跳过测试 -->
 					<skip>true</skip>
 					<encoding>UTF-8</encoding>
@@ -288,6 +288,10 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
 					<encoding>UTF-8</encoding>
+					<packagingExcludes>
+						WEB-INF/classes/properties/**,
+						WEB-INF/classes/*.properties
+					</packagingExcludes>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -301,6 +305,7 @@
 					<uriEncoding>UTF-8</uriEncoding>
 				</configuration>
 			</plugin>
+			
 		</plugins>
 		<resources>
 			<resource>
